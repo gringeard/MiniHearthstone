@@ -9,8 +9,8 @@ public class CarteSort extends Carte {
     
     public Effet effet_;
 
-    public CarteSort(int mana, Effet effet) {
-        super(mana);
+    public CarteSort(String nom, int mana, Effet effet) {
+        super(nom, mana);
         etatLancerSort_ = new EtatLancerSort(this);
         effet_ = effet;
     }

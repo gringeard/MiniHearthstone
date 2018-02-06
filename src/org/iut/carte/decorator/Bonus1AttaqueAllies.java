@@ -11,14 +11,10 @@ import org.iut.carte.Carte;
  *
  * @author Gwen
  */
-public class Decorator extends Carte {
+public class Bonus1AttaqueAllies extends Decorator {
     
-    protected Carte noyau;
-
-    public Decorator(Carte carte) {
-        super(carte.getNom_(), carte.getMana());
-        noyau = carte;
+    public Bonus1AttaqueAllies(Carte carte) {
+        super(carte);
     }
-    
     
 }

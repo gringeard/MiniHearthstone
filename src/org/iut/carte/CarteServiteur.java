@@ -11,8 +11,8 @@ public class CarteServiteur extends Carte {
     public int degat_;
     public int pv_;
     
-    public CarteServiteur(int mana, int degat, int pv) {
-        super(mana);
+    public CarteServiteur(String nom, int mana, int degat, int pv) {
+        super(nom, mana);
         etatPretAAttaquer_ = new EtatPretAAttaquer(this);
         degat_ = degat;
         pv_ = pv;

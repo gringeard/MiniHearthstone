@@ -1,5 +1,12 @@
 package org.iut.hero;
 
-public class HeroMage {
+import org.iut.actionspeciale.BouleDeFeu;
+
+public class HeroMage extends Hero {
+
+    public HeroMage() {
+        super();
+        sp_ = new BouleDeFeu();
+    }
 
 }

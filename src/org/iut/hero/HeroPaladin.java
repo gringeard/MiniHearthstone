@@ -1,5 +1,12 @@
 package org.iut.hero;
 
-public class HeroPaladin {
+import org.iut.actionspeciale.Renfort;
+
+public class HeroPaladin extends Hero {
+
+    public HeroPaladin() {
+        super();
+        sp_ = new Renfort();
+    }
 
 }

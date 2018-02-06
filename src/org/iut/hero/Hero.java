@@ -4,15 +4,15 @@ import org.iut.actionspeciale.ActionSpeciale;
 
 public abstract class Hero {
 	
-	private int pdv;
-	private int mana;
-	private int armure;
-	private ActionSpeciale sp;
+	protected int pdv_;
+	protected int mana_;
+	protected int armure_;
+	protected ActionSpeciale sp_;
 	
-	public Hero(int pdv, int mana, ActionSpeciale sp) {
-		this.pdv = pdv;
-		this.mana = mana;
-		this.sp = sp;
+	public Hero() {
+		pdv_ = 30;
+		mana_ = 1;
+                armure_ = 0;
 	}
 	
 	

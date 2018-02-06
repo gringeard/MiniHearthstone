@@ -11,14 +11,10 @@ import org.iut.carte.Carte;
  *
  * @author Gwen
  */
-public class Decorator extends Carte {
+public class Provocation extends Decorator {
     
-    protected Carte noyau;
-
-    public Decorator(Carte carte) {
-        super(carte.getNom_(), carte.getMana());
-        noyau = carte;
+    public Provocation(Carte carte) {
+        super(carte);
     }
-    
     
 }
