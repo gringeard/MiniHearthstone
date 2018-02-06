@@ -1,20 +1,37 @@
 package org.iut.carte;
 
+import org.iut.carte.state.Etat;
+import org.iut.carte.state.EtatLancerSort;
+
 public class CarteSort extends Carte {
-	
-    public Effet effet;
+    
+    private Etat etatLancerSort_;
+    
+    public Effet effet_;
 
     public CarteSort(int mana, Effet effet) {
         super(mana);
-        this.effet = effet;
+        etatLancerSort_ = new EtatLancerSort(this);
+        effet_ = effet;
     }
 
+    //Transitions
+    public void lancerSort(){
+        etatCourant_.lancerSort();
+    }
+    
+    //Actions
+    public void changerEtatLancerSort(){
+        etatCourant_ = etatLancerSort_;
+        afficherMessage();
+    }
+    
     public Effet getEffet() {
-        return effet;
+        return effet_;
     }
 
     public void setEffet(Effet effet) {
-        this.effet = effet;
+        this.effet_ = effet;
     }
     
 

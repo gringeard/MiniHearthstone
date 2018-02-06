@@ -1,30 +1,57 @@
 package org.iut.carte;
 
+import org.iut.carte.state.Etat;
+import org.iut.carte.state.EtatPretAAttaquer;
+
 public class CarteServiteur extends Carte {
 
-    public int degat;
-    public int pv;
+    private Etat etatDors_;
+    private Etat etatPretAAttaquer_;
+    
+    public int degat_;
+    public int pv_;
     
     public CarteServiteur(int mana, int degat, int pv) {
         super(mana);
-        this.degat = degat;
-        this.pv = pv;
+        etatPretAAttaquer_ = new EtatPretAAttaquer(this);
+        degat_ = degat;
+        pv_ = pv;
+    }
+    
+    //Transitions
+    public void dors(){
+        etatCourant_.dors();
+    }
+    
+    public void pretAAttaquer(){
+        etatCourant_.pretAAttaquer();
     }
 
+    //Actions
+    public void changerEtatDors(){
+        etatCourant_ = etatDors_;
+        afficherMessage();
+    }
+    
+    public void changerEtatPretAAttaquer(){
+        etatCourant_ = etatPretAAttaquer_;
+        afficherMessage();
+    }
+    
     public int getDegat() {
-        return degat;
+        return degat_;
     }
 
     public void setDegat(int degat) {
-        this.degat = degat;
+        degat_ = degat;
     }
 
     public int getPv() {
-        return pv;
+        return pv_;
     }
 
     public void setPv(int pv) {
-        this.pv = pv;
+        pv_ = pv;
     }
 
 
