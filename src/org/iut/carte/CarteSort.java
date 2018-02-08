@@ -34,7 +34,10 @@ public class CarteSort extends Carte {
         this.effet_ = effet;
     }
     
-
+    @Override
+    public String toString() {
+        return super.toString() + " effet=" + effet_;
+    }
         
         
 	

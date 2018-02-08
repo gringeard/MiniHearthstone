@@ -16,6 +16,7 @@ import org.iut.hero.Hero;
 public abstract class Observer {
     protected Hero hero;
     protected int mana;
+    protected ArrayList<Carte> cartesEnPile;
     protected ArrayList<Carte> cartesEnMain;
     protected ArrayList<Carte> cartesPosees;
     protected Sujet sujet;
@@ -28,14 +29,16 @@ public abstract class Observer {
         
     }
     
-    public void update( Hero hero, int mana, ArrayList<Carte> cartesEnMain, ArrayList<Carte> cartesPosees  )
+    public void update( Hero hero, int mana, ArrayList<Carte> cartesEnPile, ArrayList<Carte> cartesEnMain, ArrayList<Carte> cartesPosees  )
     {
         this.hero = hero;
+        this.cartesEnPile = cartesEnPile;
         this.cartesEnMain = cartesEnMain;
         this.cartesPosees = cartesPosees;
         System.out.println(this.sujet.getNom()+"{mana=" + this.sujet.getMana() + "}");
         System.out.println( this.hero );
         System.out.println( "cartes en main : " + this.cartesEnMain );
         System.out.println( "cartes posees : " + this.cartesPosees );
+        System.out.println( "cartes en pile : " + this.cartesEnPile );
     }
 }

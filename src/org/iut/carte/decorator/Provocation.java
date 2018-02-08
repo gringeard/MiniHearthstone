@@ -5,7 +5,7 @@
  */
 package org.iut.carte.decorator;
 
-import org.iut.carte.Carte;
+import org.iut.carte.CarteServiteur;
 
 /**
  *
@@ -13,8 +13,13 @@ import org.iut.carte.Carte;
  */
 public class Provocation extends Decorator {
     
-    public Provocation(Carte carte) {
+    public Provocation(CarteServiteur carte) {
         super(carte);
+    }
+    
+    @Override
+    public String toString() {
+        return noyau.toString() + " provocation";
     }
     
 }

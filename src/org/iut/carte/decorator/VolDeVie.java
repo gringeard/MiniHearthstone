@@ -5,7 +5,7 @@
  */
 package org.iut.carte.decorator;
 
-import org.iut.carte.Carte;
+import org.iut.carte.CarteServiteur;
 
 /**
  *
@@ -13,8 +13,13 @@ import org.iut.carte.Carte;
  */
 public class VolDeVie extends Decorator {
     
-    public VolDeVie(Carte carte) {
+    public VolDeVie(CarteServiteur carte) {
         super(carte);
+    }
+    
+    @Override
+    public String toString() {
+        return noyau.toString() + " vol-de-vie";
     }
     
 }

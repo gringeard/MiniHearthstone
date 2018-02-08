@@ -13,6 +13,7 @@ import org.iut.hero.FactoryHeroPaladin;
 import org.iut.hero.Hero;
 import org.iut.observer.AffichageJoueur;
 import org.iut.observer.Joueur;
+import org.iut.observer.Sujet;
 
 /**
  *
@@ -36,10 +37,14 @@ public class ControleurPrincipal {
         this.joueur2 = new Joueur("Joueur 2", this.tour%2);
         this.affJoueur1 = new AffichageJoueur(joueur1);
         this.affJoueur2 = new AffichageJoueur(joueur2);
-        this.tour = 1;
+        this.tour = 0;
         
     }
 
+    public VueConsole getVc() {
+        return vc;
+    }
+    
     public Joueur getJoueur1() {
         return joueur1;
     }
@@ -79,6 +84,14 @@ public class ControleurPrincipal {
     public void setTour(int tour) {
         this.tour = tour;
     }
+
+    public FactoryHero getFh() {
+        return fh;
+    }
+
+    public void setFh(FactoryHero fh) {
+        this.fh = fh;
+    }
     
     
         
@@ -88,7 +101,51 @@ public class ControleurPrincipal {
     public static void main(String[] args) {
         ControleurPrincipal cp = new ControleurPrincipal();
         cp.getJoueur1().setHero(cp.choixHero(1));
+        cp.getJoueur1().setCartesEnPile(cp.getFh().creerCartes());
         cp.getJoueur2().setHero(cp.choixHero(2));
+        cp.getJoueur2().setCartesEnPile(cp.getFh().creerCartes());
+        
+        //Qui commence ?
+        Sujet firstJoueur;
+        Sujet secondJoueur;
+        int numero = (int) (Math.random() * 2);
+        if(numero == 0){
+            cp.getJoueur1().setFirst(true);
+            firstJoueur = cp.getJoueur1();
+            secondJoueur = cp.getJoueur2();
+        }else{
+            cp.getJoueur2().setFirst(true);
+            firstJoueur = cp.getJoueur2();
+            secondJoueur = cp.getJoueur1();
+        }
+        cp.getVc().afficherJoueurCommence(firstJoueur.getNom());
+        
+        //Premier tour
+        firstJoueur.piocher();
+        String choix;
+        do{
+            choix = cp.choixAction(firstJoueur);
+            System.out.println(choix);
+        }while(!choix.equals("4"));
+        secondJoueur.piocher();
+        do{
+            choix = cp.choixAction(firstJoueur);
+            System.out.println(choix);
+        }while(!choix.equals("4"));
+        
+        //On joue tant que les 2 héros ont plus de 1 pv
+        while((firstJoueur.getHero().getPdv_() > 0) && (secondJoueur.getHero().getPdv_() > 0)){
+            firstJoueur.debuterTour();
+            do{
+                choix = cp.choixAction(firstJoueur);
+                System.out.println(choix);
+            }while(!choix.equals("4"));
+            secondJoueur.debuterTour();
+            do{
+                choix = cp.choixAction(firstJoueur);
+                System.out.println(choix);
+            }while(!choix.equals("4"));
+        }
     }
 
     private Hero choixHero(int i) {
@@ -106,6 +163,27 @@ public class ControleurPrincipal {
                 break;
         }
         return this.fh.creerHero();
+    }
+    
+    private String choixAction(Sujet joueur){
+        vc.afficherChoixAction();
+        String choix = scanner.nextLine();
+        switch (choix) {
+            case "1":
+                joueur.attaquer();
+                break;
+            case "2":
+                joueur.jouerCarte();
+                break;
+            case "3":
+                joueur.lancerActionSpeciale();
+                break;
+            case "4":
+                joueur.finirTour();
+                break;
+        }
+        
+        return choix;
     }
     
 }

@@ -81,6 +81,11 @@ public abstract class Carte {
     public void setNom_(String nom_) {
         this.nom_ = nom_;
     }    
+
+    @Override
+    public String toString() {
+        return nom_ + ": mana=" + mana_;
+    }
 	
-	
+    
 }

@@ -5,25 +5,27 @@
  */
 package org.iut.observer.stateJoueur;
 
-import org.iut.observer.Joueur;
+import org.iut.observer.Sujet;
 
 /**
  *
  * @author Gwen
  */
 public abstract class EtatJoueur {
-    protected Joueur joueur_;
+    protected Sujet joueur_;
 
-    public EtatJoueur(Joueur j) {
+    public EtatJoueur(Sujet j) {
         joueur_ = j;
     }
     
     //Transitions
-    public void piocherCarte(){};
     public void jouer(){};
+    public void attaquer(){};
+    public void jouerCarte(){};
+    public void lancerActionSpeciale(){};
     public void finirTour(){};
     public void debuterTour() {};
-    
+    public void piocher(){};
     
     //Actions
     public abstract void afficherMessage();

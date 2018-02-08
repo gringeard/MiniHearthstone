@@ -11,30 +11,24 @@ import org.iut.observer.Sujet;
  *
  * @author Gwen
  */
-public class EtatJoueurDebut extends EtatJoueur {
+public class EtatJoueurFinirTour extends EtatJoueur {
 
-    public EtatJoueurDebut(Sujet j) {
+    public EtatJoueurFinirTour(Sujet j) {
         super(j);
     }
 
     @Override
-    public void piocher(){
-        int nb;
-        if(joueur_.isFirst()){
-            nb = 3;
-        }else{
-            nb = 4;
-        }
+    public void debuterTour(){
         joueur_.changerEtatJoueurPiocher();
-        for(int i=0; i<nb; i++){
-            joueur_.piocherCarteAleatoirement();
-        }
+        joueur_.piocherCarteAleatoirement();
         joueur_.changerEtatJoueurJouer();
     };
 
     @Override
     public void afficherMessage() {
-
+        System.out.println("\n============================================");
+        System.out.println(joueur_.getNom() + " termine son tour");
+        System.out.println("============================================");
     }
     
 }

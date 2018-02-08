@@ -11,25 +11,22 @@ import org.iut.observer.Sujet;
  *
  * @author Gwen
  */
-public class EtatJoueurDebut extends EtatJoueur {
+public class EtatJoueurJouer extends EtatJoueur {
 
-    public EtatJoueurDebut(Sujet j) {
+    public EtatJoueurJouer(Sujet j) {
         super(j);
     }
 
     @Override
     public void piocher(){
-        int nb;
-        if(joueur_.isFirst()){
-            nb = 3;
-        }else{
-            nb = 4;
-        }
         joueur_.changerEtatJoueurPiocher();
-        for(int i=0; i<nb; i++){
-            joueur_.piocherCarteAleatoirement();
-        }
+        joueur_.piocherCarteAleatoirement();
         joueur_.changerEtatJoueurJouer();
+    };
+    
+    @Override
+    public void finirTour(){
+        joueur_.changerEtatJoueurFinirTour();
     };
 
     @Override

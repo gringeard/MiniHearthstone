@@ -14,7 +14,7 @@ public class VueConsole {
     public VueConsole() {
     }
     
-    public void afficherChoixHero(int i) {
+    public static void afficherChoixHero(int i) {
         System.out.println("============================================");
         System.out.println("Choix du héros");
         System.out.println("1 - Mage");
@@ -23,4 +23,19 @@ public class VueConsole {
         System.out.println("Joueur "+i+" : choisissez votre héros : ");
     }
     
+    public void afficherJoueurCommence(String nom){
+        System.out.println("\n============================================");
+        System.out.println(nom+" commence");
+        System.out.println("============================================");
+    }
+    
+     public void afficherChoixAction(){
+        System.out.println("\n============================================");
+        System.out.println("Choix de l'action");
+        System.out.println("1 - Jouer une carte");
+        System.out.println("2 - Attaquer");
+        System.out.println("3 - Utiliser l'action spéciale du héros");
+        System.out.println("4 - Terminer son tour");
+        System.out.println("============================================");
+    }
 }

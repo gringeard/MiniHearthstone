@@ -54,6 +54,11 @@ public class CarteServiteur extends Carte {
         pv_ = pv;
     }
 
+    @Override
+    public String toString() {
+        return super.toString() + " degat=" + degat_ + " pv=" + pv_;
+    }
+
 
 
 }

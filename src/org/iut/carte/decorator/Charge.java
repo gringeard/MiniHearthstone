@@ -5,7 +5,7 @@
  */
 package org.iut.carte.decorator;
 
-import org.iut.carte.Carte;
+import org.iut.carte.CarteServiteur;
 
 /**
  *
@@ -13,8 +13,14 @@ import org.iut.carte.Carte;
  */
 public class Charge extends Decorator {
     
-    public Charge(Carte carte) {
+    public Charge(CarteServiteur carte) {
         super(carte);
     }
+
+    @Override
+    public String toString() {
+        return noyau.toString() + " charge";
+    }
+    
     
 }

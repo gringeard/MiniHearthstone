@@ -5,18 +5,18 @@
  */
 package org.iut.carte.decorator;
 
-import org.iut.carte.Carte;
+import org.iut.carte.CarteServiteur;
 
 /**
  *
  * @author Gwen
  */
-public class Decorator extends Carte {
+public class Decorator extends CarteServiteur {
     
-    protected Carte noyau;
+    protected CarteServiteur noyau;
 
-    public Decorator(Carte carte) {
-        super(carte.getNom_(), carte.getMana());
+    public Decorator(CarteServiteur carte) {
+        super(carte.getNom_(), carte.getMana(), carte.getDegat(), carte.getPv());
         noyau = carte;
     }
     

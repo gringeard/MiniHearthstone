@@ -5,7 +5,7 @@
  */
 package org.iut.carte.decorator;
 
-import org.iut.carte.Carte;
+import org.iut.carte.CarteServiteur;
 
 /**
  *
@@ -13,7 +13,7 @@ import org.iut.carte.Carte;
  */
 public class Bonus1AttaqueAllies extends Decorator {
     
-    public Bonus1AttaqueAllies(Carte carte) {
+    public Bonus1AttaqueAllies(CarteServiteur carte) {
         super(carte);
     }
     
