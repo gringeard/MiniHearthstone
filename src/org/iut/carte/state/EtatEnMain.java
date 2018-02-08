@@ -25,11 +25,15 @@ public class EtatEnMain extends Etat {
         carte_.changerEtatJouee();
         
         if(carte_ instanceof CarteServiteur){
-            ((CarteServiteur) carte_).changerEtatDors();
-        }else if(carte_ instanceof Charge){
+            if(carte_ instanceof Charge){
                 ((CarteServiteur) carte_).changerEtatPretAAttaquer();
+            }else{
+                ((CarteServiteur) carte_).changerEtatDors();
+            }
         }else if(carte_ instanceof CarteSort){
                 ((CarteSort) carte_).changerEtatLancerSort();
+                //exécuter l'effet
+                ((CarteSort) carte_).changerEtatEnDefausse();
         }
     }
 

@@ -11,8 +11,8 @@ package org.iut.observer;
  */
 public class Joueur extends Sujet{
     
-    public Joueur(String nom, int mana) {
-        super(nom, mana);
+    public Joueur(String nom) {
+        super(nom);
     }
     
 }

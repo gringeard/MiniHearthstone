@@ -18,7 +18,12 @@ public class EtatJoueurFinirTour extends EtatJoueur {
     }
 
     @Override
-    public void debuterTour(){
+    public void debuterTour(int tour){
+        if(tour < 10){
+            joueur_.setMana(tour);
+        }else{
+            joueur_.setMana(10);
+        }
         joueur_.changerEtatJoueurDebuterTour();
         joueur_.changerEtatJoueurPiocher();
         joueur_.piocherCarteAleatoirement();

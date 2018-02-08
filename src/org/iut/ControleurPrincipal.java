@@ -32,12 +32,11 @@ public class ControleurPrincipal {
     public ControleurPrincipal() {
         this.vc = new VueConsole();
         this.scanner = new Scanner(System.in);
-        this.tour = 1;
-        this.joueur1 = new Joueur("Joueur 1", this.tour%2);
-        this.joueur2 = new Joueur("Joueur 2", this.tour%2);
+        this.tour = 0;
+        this.joueur1 = new Joueur("Joueur 1");
+        this.joueur2 = new Joueur("Joueur 2");
         this.affJoueur1 = new AffichageJoueur(joueur1);
         this.affJoueur2 = new AffichageJoueur(joueur2);
-        this.tour = 0;
         
     }
 
@@ -93,6 +92,10 @@ public class ControleurPrincipal {
         this.fh = fh;
     }
     
+    public void nouveauTour(){
+        this.tour++;
+    }
+    
     
         
     /**
@@ -122,12 +125,13 @@ public class ControleurPrincipal {
         
         //On joue tant que les 2 héros ont plus de 1 pv
         while((firstJoueur.getHero().getPdv_() > 0) && (secondJoueur.getHero().getPdv_() > 0)){
-            firstJoueur.debuterTour();
+            cp.nouveauTour();
+            firstJoueur.debuterTour(cp.getTour());
             String choix;
             do{
                 choix = cp.choixAction(firstJoueur);
             }while(!choix.equals("4"));
-            secondJoueur.debuterTour();
+            secondJoueur.debuterTour(cp.getTour());
             do{
                 choix = cp.choixAction(secondJoueur);
             }while(!choix.equals("4"));
@@ -156,10 +160,10 @@ public class ControleurPrincipal {
         String choix = scanner.nextLine();
         switch (choix) {
             case "1":
-                joueur.attaquer();
+                choixCarteAJouer(joueur);
                 break;
             case "2":
-                joueur.jouerCarte();
+                joueur.attaquer();
                 break;
             case "3":
                 joueur.lancerActionSpeciale();
@@ -170,6 +174,13 @@ public class ControleurPrincipal {
         }
         
         return choix;
+    }
+    
+    private void choixCarteAJouer(Sujet joueur){
+        vc.afficherChoixCarteAJouer(joueur);
+        int choix = Integer.parseInt(scanner.nextLine());
+        joueur.jouerCarte(choix-1);
+        
     }
     
 }

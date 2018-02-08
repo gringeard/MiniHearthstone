@@ -25,6 +25,20 @@ public class EtatJoueurJouer extends EtatJoueur {
     };
     
     @Override
+    public void jouerCarte(int index){
+        if(joueur_.getMana() >= joueur_.getCartesEnMain().get(index).getMana()){
+            joueur_.changerEtatJoueurJouerCarte();
+            joueur_.setMana(joueur_.getMana() - joueur_.getCartesEnMain().get(index).getMana());
+            joueur_.poserCarte(index);
+            joueur_.changerEtatJoueurJouer();            
+        }else{
+            System.out.println("\n============================================");
+            System.out.println("Vous n'avez pas assez de mana");
+            System.out.println("============================================");
+        }
+    };
+    
+    @Override
     public void finirTour(){
         joueur_.changerEtatJoueurFinirTour();
     };

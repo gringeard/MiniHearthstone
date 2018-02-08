@@ -21,10 +21,10 @@ public abstract class EtatJoueur {
     //Transitions
     public void jouer(){};
     public void attaquer(){};
-    public void jouerCarte(){};
+    public void jouerCarte(int index){};
     public void lancerActionSpeciale(){};
     public void finirTour(){};
-    public void debuterTour() {};
+    public void debuterTour(int tour) {};
     public void piocher(){};
     
     //Actions

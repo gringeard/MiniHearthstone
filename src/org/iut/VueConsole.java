@@ -5,6 +5,9 @@
  */
 package org.iut;
 
+import org.iut.carte.Carte;
+import org.iut.observer.Sujet;
+
 /**
  *
  * @author Gwen
@@ -29,13 +32,24 @@ public class VueConsole {
         System.out.println("============================================");
     }
     
-     public void afficherChoixAction(){
+    public void afficherChoixAction(){
         System.out.println("\n============================================");
         System.out.println("Choix de l'action");
         System.out.println("1 - Jouer une carte");
         System.out.println("2 - Attaquer");
         System.out.println("3 - Utiliser l'action spéciale du héros");
         System.out.println("4 - Terminer son tour");
+        System.out.println("============================================");
+    }
+     
+    public void afficherChoixCarteAJouer(Sujet joueur){
+        System.out.println("\n============================================");
+        System.out.println("Choix de la carte à poser");
+        int i = 1;
+        for(Carte c : joueur.getCartesEnMain()){
+            System.out.println(i + " - " + c.toString());
+            i++;
+        }
         System.out.println("============================================");
     }
 }

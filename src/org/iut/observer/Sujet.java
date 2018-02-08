@@ -7,12 +7,14 @@ package org.iut.observer;
 
 import java.util.ArrayList;
 import org.iut.carte.Carte;
+import org.iut.carte.CarteServiteur;
 import org.iut.hero.Hero;
 import org.iut.observer.stateJoueur.EtatJoueur;
 import org.iut.observer.stateJoueur.EtatJoueurDebut;
 import org.iut.observer.stateJoueur.EtatJoueurDebuterTour;
 import org.iut.observer.stateJoueur.EtatJoueurFinirTour;
 import org.iut.observer.stateJoueur.EtatJoueurJouer;
+import org.iut.observer.stateJoueur.EtatJoueurJouerCarte;
 import org.iut.observer.stateJoueur.EtatJoueurPiocher;
 import org.iut.services.Service;
 
@@ -33,14 +35,15 @@ public class Sujet {
     private EtatJoueur etatJoueurDebut;
     private EtatJoueur etatJoueurJouer;
     private EtatJoueur etatJoueurPiocher;
+    private EtatJoueur etatJoueurJouerCarte;
     private EtatJoueur etatJoueurDebuterTour;
     private EtatJoueur etatJoueurFinirTour;
 
     protected EtatJoueur etatJoueurCourant;
 
-    public Sujet(String nom, int mana) {
+    public Sujet(String nom) {
         this.nom = nom;
-        this.mana = mana;
+        this.mana = 1;
         this.first = false;
         cartesEnMain = new ArrayList<>();
         cartesPosees = new ArrayList<>();
@@ -49,6 +52,7 @@ public class Sujet {
         etatJoueurDebut = new EtatJoueurDebut(this);
         etatJoueurJouer = new EtatJoueurJouer(this);
         etatJoueurPiocher = new EtatJoueurPiocher(this);
+        etatJoueurJouerCarte = new EtatJoueurJouerCarte(this);
         etatJoueurDebuterTour = new EtatJoueurDebuterTour(this);
         etatJoueurFinirTour = new EtatJoueurFinirTour(this);
         
@@ -129,6 +133,15 @@ public class Sujet {
         this.addCartesEnMain(nouvelleCarte);
     }
     
+    public void poserCarte(int index){
+        Carte carteAPoser = this.cartesEnMain.get(index);
+        this.cartesEnMain.remove(carteAPoser);
+        carteAPoser.jouerCarte();
+        if (carteAPoser instanceof CarteServiteur){
+            this.cartesPosees.add(carteAPoser);
+        }
+    }
+    
     //Transitions
     public void piocher(){
         etatJoueurCourant.piocher();
@@ -144,16 +157,17 @@ public class Sujet {
         etatJoueurCourant.attaquer();
     }
     
-    public void jouerCarte(){
-        etatJoueurCourant.jouerCarte();
+    public void jouerCarte(int index){
+        etatJoueurCourant.jouerCarte(index);
+        notifier();
     }
     
     public void lancerActionSpeciale(){
         etatJoueurCourant.lancerActionSpeciale();
     }
     
-    public void debuterTour(){
-        etatJoueurCourant.debuterTour();
+    public void debuterTour(int tour){
+        etatJoueurCourant.debuterTour(tour);
         notifier();
     }
     
@@ -176,6 +190,12 @@ public class Sujet {
     public void changerEtatJoueurPiocher()
     {
         etatJoueurCourant = etatJoueurPiocher;
+        afficherMessage();
+    }
+    
+    public void changerEtatJoueurJouerCarte()
+    {
+        etatJoueurCourant = etatJoueurJouerCarte;
         afficherMessage();
     }
     

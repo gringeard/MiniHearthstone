@@ -1,6 +1,7 @@
 package org.iut.carte;
 
 import org.iut.carte.state.Etat;
+import org.iut.carte.state.EtatDors;
 import org.iut.carte.state.EtatPretAAttaquer;
 
 public class CarteServiteur extends Carte {
@@ -13,6 +14,7 @@ public class CarteServiteur extends Carte {
     
     public CarteServiteur(String nom, int mana, int degat, int pv) {
         super(nom, mana);
+        etatDors_ = new EtatDors(this);
         etatPretAAttaquer_ = new EtatPretAAttaquer(this);
         degat_ = degat;
         pv_ = pv;

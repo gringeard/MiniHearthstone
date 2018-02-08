@@ -44,7 +44,7 @@ public abstract class Carte {
     
     // Actions
     public void afficherMessage()
-      {
+    {
       etatCourant_.afficherMessage();
     }
 
