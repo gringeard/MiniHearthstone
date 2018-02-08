@@ -3,16 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.iut.hero;
-
-import java.util.ArrayList;
-import org.iut.carte.Carte;
+package org.iut.observer;
 
 /**
  *
  * @author Gwen
  */
-public interface FactoryHero {
-    public Hero creerHero();
-    public ArrayList<Carte> creerCartes();
+public class Joueur extends Sujet{
+    
+    public Joueur(String nom, int mana) {
+        super(nom, mana);
+    }
+    
 }

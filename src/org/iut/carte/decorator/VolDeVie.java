@@ -3,16 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.iut.hero;
+package org.iut.carte.decorator;
 
-import java.util.ArrayList;
 import org.iut.carte.Carte;
 
 /**
  *
  * @author Gwen
  */
-public interface FactoryHero {
-    public Hero creerHero();
-    public ArrayList<Carte> creerCartes();
+public class VolDeVie extends Decorator {
+    
+    public VolDeVie(Carte carte) {
+        super(carte);
+    }
+    
 }

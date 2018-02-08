@@ -9,6 +9,10 @@ package org.iut.carte;
  *
  * @author Gwen
  */
-class Effet {
+public class Effet {
+
+    public Effet() {
+    }
+    
     
 }
