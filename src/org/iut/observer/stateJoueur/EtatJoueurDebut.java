@@ -18,7 +18,8 @@ public class EtatJoueurDebut extends EtatJoueur {
     }
 
     @Override
-    public void piocher(){
+    public void debuterTour(){
+        joueur_.changerEtatJoueurDebuterTour();
         int nb;
         if(joueur_.isFirst()){
             nb = 3;

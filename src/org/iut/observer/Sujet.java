@@ -135,6 +135,11 @@ public class Sujet {
         notifier();
     }
     
+    public void jouer(){
+        etatJoueurCourant.piocher();
+        notifier();
+    }
+    
     public void attaquer(){
         etatJoueurCourant.attaquer();
     }
@@ -149,6 +154,7 @@ public class Sujet {
     
     public void debuterTour(){
         etatJoueurCourant.debuterTour();
+        notifier();
     }
     
     public void finirTour(){

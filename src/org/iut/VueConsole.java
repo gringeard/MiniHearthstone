@@ -14,7 +14,7 @@ public class VueConsole {
     public VueConsole() {
     }
     
-    public static void afficherChoixHero(int i) {
+    public void afficherChoixHero(int i) {
         System.out.println("============================================");
         System.out.println("Choix du héros");
         System.out.println("1 - Mage");

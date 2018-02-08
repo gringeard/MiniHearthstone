@@ -19,6 +19,7 @@ public class EtatJoueurFinirTour extends EtatJoueur {
 
     @Override
     public void debuterTour(){
+        joueur_.changerEtatJoueurDebuterTour();
         joueur_.changerEtatJoueurPiocher();
         joueur_.piocherCarteAleatoirement();
         joueur_.changerEtatJoueurJouer();

@@ -120,30 +120,16 @@ public class ControleurPrincipal {
         }
         cp.getVc().afficherJoueurCommence(firstJoueur.getNom());
         
-        //Premier tour
-        firstJoueur.piocher();
-        String choix;
-        do{
-            choix = cp.choixAction(firstJoueur);
-            System.out.println(choix);
-        }while(!choix.equals("4"));
-        secondJoueur.piocher();
-        do{
-            choix = cp.choixAction(firstJoueur);
-            System.out.println(choix);
-        }while(!choix.equals("4"));
-        
         //On joue tant que les 2 héros ont plus de 1 pv
         while((firstJoueur.getHero().getPdv_() > 0) && (secondJoueur.getHero().getPdv_() > 0)){
             firstJoueur.debuterTour();
+            String choix;
             do{
                 choix = cp.choixAction(firstJoueur);
-                System.out.println(choix);
             }while(!choix.equals("4"));
             secondJoueur.debuterTour();
             do{
-                choix = cp.choixAction(firstJoueur);
-                System.out.println(choix);
+                choix = cp.choixAction(secondJoueur);
             }while(!choix.equals("4"));
         }
     }
