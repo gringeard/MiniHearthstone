@@ -28,8 +28,10 @@ public class EtatJoueurJouer extends EtatJoueur {
     
     @Override
     public void jouerCarte(int index){
+        //On vérifie que le joueur a assez de mana
         if(joueur_.getMana() >= joueur_.getCartesEnMain().get(index).getMana()){
             joueur_.changerEtatJoueurJouerCarte();
+            //On retire alors au joueur le nombre de points de mana que vaut la carte
             joueur_.setMana(joueur_.getMana() - joueur_.getCartesEnMain().get(index).getMana());
             joueur_.poserCarte(index);
             joueur_.changerEtatJoueurJouer();            
@@ -45,11 +47,16 @@ public class EtatJoueurJouer extends EtatJoueur {
         joueur_.changerEtatJoueurAffronterCarte();
         Carte cJoueur = joueur_.getCartesPosees().get(indexCJoueur);
         if(cJoueur instanceof CarteServiteur){
+            //On récupère les pv de la carte du joueur et les dégats de la carte adverse
             int pdvCJoueur = ((CarteServiteur) cJoueur).getPv();
             int degatsCAdversaire = ((CarteServiteur) cAdversaire).getDegat();
+            //Si la carte a plus de pv que les degats infligés
             if(pdvCJoueur > degatsCAdversaire){
+                //On lui retire autant de pv que de dégats
                 ((CarteServiteur)joueur_.getCartesPosees().get(indexCJoueur)).setPv(pdvCJoueur - degatsCAdversaire);
+                //La carte s'endors pour le tour
                 ((CarteServiteur)joueur_.getCartesPosees().get(indexCJoueur)).dors();
+            //Sinon la carte est détruite et part en défausse
             }else{
                 ((CarteServiteur)joueur_.getCartesPosees().get(indexCJoueur)).changerEtatEnDefausse();
                 joueur_.getCartesPosees().remove(indexCJoueur);
@@ -67,6 +74,7 @@ public class EtatJoueurJouer extends EtatJoueur {
         joueur_.changerEtatJoueurAttaquerHero();
         Carte cJoueur = joueur_.getCartesPosees().get(indexCartePourAttaquer);
         if(cJoueur instanceof CarteServiteur){
+            //Le héros n'ayant pas de points de dégats, la carte s'endors juste
             ((CarteServiteur)joueur_.getCartesPosees().get(indexCartePourAttaquer)).dors();
         }
     }

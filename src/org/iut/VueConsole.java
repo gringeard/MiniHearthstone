@@ -18,13 +18,13 @@ public class VueConsole {
     public VueConsole() {
     }
     
-    public void afficherChoixHero(int i) {
+    public void afficherChoixHero(String nom) {
         System.out.println("============================================");
         System.out.println("Choix du héros");
         System.out.println("1 - Mage");
         System.out.println("2 - Guerrier");
         System.out.println("3 - Paladin");
-        System.out.println("Joueur "+i+" : choisissez votre héros : ");
+        System.out.println(nom + " : choisissez votre héros : ");
     }
     
     public void afficherJoueurCommence(String nom){
