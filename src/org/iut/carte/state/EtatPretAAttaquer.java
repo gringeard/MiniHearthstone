@@ -6,6 +6,7 @@
 package org.iut.carte.state;
 
 import org.iut.carte.Carte;
+import org.iut.carte.CarteServiteur;
 
 /**
  *
@@ -20,6 +21,11 @@ public class EtatPretAAttaquer extends Etat {
     @Override
     public void defausserCarte() {
         carte_.changerEtatEnDefausse();
+    }
+    
+    @Override
+    public void dors() {
+        ((CarteServiteur) carte_).changerEtatDors();
     }
 
     @Override

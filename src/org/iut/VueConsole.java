@@ -6,6 +6,7 @@
 package org.iut;
 
 import org.iut.carte.Carte;
+import org.iut.carte.state.EtatDors;
 import org.iut.observer.Sujet;
 
 /**
@@ -50,6 +51,47 @@ public class VueConsole {
             System.out.println(i + " - " + c.toString());
             i++;
         }
+        System.out.println("-1 - retour");
+        System.out.println("============================================");
+    }
+    
+    public void afficherChoixCartePourAttaquer(Sujet joueur){
+        System.out.println("\n============================================");
+        System.out.println("Choix de la carte pour attaquer");
+        int i = 1;
+        for(Carte c : joueur.getCartesPosees()){
+            System.out.print("\n"+i + " - " + c.toString());
+            if(c.getEtatCourant_() instanceof  EtatDors){
+                System.out.print(" dors!");
+            }
+            i++;
+        }
+        System.out.println("\n-1 - retour");
+        System.out.println("============================================");
+    }
+
+    void infosCombat(Sujet joueur, Sujet adversaire) {
+        System.out.println("\n============================================");
+        System.out.println("Adversaire :");
+        System.out.println(adversaire.getHero());
+        System.out.println("cartes posées :" + adversaire.getCartesPosees());
+        System.out.println("============================================");
+        System.out.println("Vous :");
+        System.out.println(joueur.getHero());
+        System.out.println("cartes posées :" + joueur.getCartesPosees());
+         System.out.println("============================================");
+    }
+
+    void afficherChoixCarteOuHeroAAttaquer(Sujet adversaire) {
+        System.out.println("\n============================================");
+        System.out.println("Choix de la carte ou du héros à attaquer");
+        System.out.println("0 - " + adversaire.getHero());
+        int i = 1;
+        for(Carte c : adversaire.getCartesPosees()){
+            System.out.println(i + " - " + c.toString());
+            i++;
+        }
+        System.out.println("-1 - retour");
         System.out.println("============================================");
     }
 }

@@ -10,8 +10,11 @@ import org.iut.carte.Carte;
 import org.iut.carte.CarteServiteur;
 import org.iut.hero.Hero;
 import org.iut.observer.stateJoueur.EtatJoueur;
+import org.iut.observer.stateJoueur.EtatJoueurAffronterCarte;
+import org.iut.observer.stateJoueur.EtatJoueurAttaquerHero;
 import org.iut.observer.stateJoueur.EtatJoueurDebut;
 import org.iut.observer.stateJoueur.EtatJoueurDebuterTour;
+import org.iut.observer.stateJoueur.EtatJoueurDefendreHero;
 import org.iut.observer.stateJoueur.EtatJoueurFinirTour;
 import org.iut.observer.stateJoueur.EtatJoueurJouer;
 import org.iut.observer.stateJoueur.EtatJoueurJouerCarte;
@@ -34,6 +37,9 @@ public class Sujet {
     
     private EtatJoueur etatJoueurDebut;
     private EtatJoueur etatJoueurJouer;
+    private EtatJoueur etatJoueurAttaquerHero;
+    private EtatJoueur etatJoueurDefendreHero;
+    private EtatJoueur etatJoueurAffronterCarte;
     private EtatJoueur etatJoueurPiocher;
     private EtatJoueur etatJoueurJouerCarte;
     private EtatJoueur etatJoueurDebuterTour;
@@ -51,6 +57,9 @@ public class Sujet {
         
         etatJoueurDebut = new EtatJoueurDebut(this);
         etatJoueurJouer = new EtatJoueurJouer(this);
+        etatJoueurAttaquerHero = new EtatJoueurAttaquerHero(this);
+        etatJoueurDefendreHero = new EtatJoueurDefendreHero(this);
+        etatJoueurAffronterCarte = new EtatJoueurAffronterCarte(this);
         etatJoueurPiocher = new EtatJoueurPiocher(this);
         etatJoueurJouerCarte = new EtatJoueurJouerCarte(this);
         etatJoueurDebuterTour = new EtatJoueurDebuterTour(this);
@@ -153,8 +162,19 @@ public class Sujet {
         notifier();
     }
     
-    public void attaquer(){
-        etatJoueurCourant.attaquer();
+    public void attaquerHero(int indexCartePourAttaquer){
+        etatJoueurCourant.attaquerHero(indexCartePourAttaquer);
+    }
+    
+    public void defendreHero(Carte c){
+        etatJoueurCourant.defendreHero(c);
+    }
+    
+    public void affronterCarte(int indexCJoueur, Carte cAdversaire){
+        etatJoueurCourant.affronterCarte(indexCJoueur, cAdversaire);
+        if(etatJoueurCourant == etatJoueurJouer){
+            notifier();
+        }
     }
     
     public void jouerCarte(int index){
@@ -184,6 +204,24 @@ public class Sujet {
     public void changerEtatJoueurJouer()
     {
         etatJoueurCourant = etatJoueurJouer;
+        afficherMessage();
+    }
+    
+    public void changerEtatJoueurAttaquerHero()
+    {
+        etatJoueurCourant = etatJoueurAttaquerHero;
+        afficherMessage();
+    }
+    
+    public void changerEtatJoueurDefendreHero()
+    {
+        etatJoueurCourant = etatJoueurDefendreHero;
+        afficherMessage();
+    }
+    
+    public void changerEtatJoueurAffronterCarte()
+    {
+    etatJoueurCourant = etatJoueurAffronterCarte;
         afficherMessage();
     }
     

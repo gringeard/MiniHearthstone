@@ -5,6 +5,7 @@
  */
 package org.iut.observer.stateJoueur;
 
+import org.iut.carte.Carte;
 import org.iut.observer.Sujet;
 
 /**
@@ -20,7 +21,9 @@ public abstract class EtatJoueur {
     
     //Transitions
     public void jouer(){};
-    public void attaquer(){};
+    public void attaquerHero(int indexCartePourAttaquer){};
+    public void defendreHero(Carte c){};
+    public void affronterCarte(int indexCJoueur, Carte cAdversaire){};
     public void jouerCarte(int index){};
     public void lancerActionSpeciale(){};
     public void finirTour(){};

@@ -82,6 +82,10 @@ public abstract class Carte {
         this.nom_ = nom_;
     }    
 
+    public Etat getEtatCourant_() {
+        return etatCourant_;
+    }
+
     @Override
     public String toString() {
         return nom_ + ": mana=" + mana_;
