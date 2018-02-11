@@ -24,16 +24,24 @@ public class EtatEnMain extends Etat {
     public void jouerCarte() {
         carte_.changerEtatJouee();
         
+        //Si la carte est un serviteur
         if(carte_ instanceof CarteServiteur){
+            //Et qu'elle est décorée de charge
             if(carte_ instanceof Charge){
+                //une fois posée elle est directement prête à attaquer
                 ((CarteServiteur) carte_).changerEtatPretAAttaquer();
+            //Sinon
             }else{
+                //Elle commence par dormir
                 ((CarteServiteur) carte_).changerEtatDors();
             }
+        //Si c'est un sort
         }else if(carte_ instanceof CarteSort){
-                ((CarteSort) carte_).changerEtatLancerSort();
-                //exécuter l'effet
-                ((CarteSort) carte_).changerEtatEnDefausse();
+            //On lance le sort
+            ((CarteSort) carte_).changerEtatLancerSort();
+            //exécuter l'effet
+            //Et on la défausse
+            ((CarteSort) carte_).changerEtatEnDefausse();
         }
     }
 
