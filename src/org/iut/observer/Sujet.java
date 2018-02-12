@@ -25,7 +25,7 @@ import org.iut.services.Service;
  *
  * @author Gwen
  */
-public class Sujet {
+public abstract class Sujet {
     protected String nom;
     protected Hero hero;
     protected int mana;
