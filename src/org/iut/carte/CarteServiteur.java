@@ -20,6 +20,14 @@ public class CarteServiteur extends Carte {
         pv_ = pv;
     }
     
+    @Override
+    public Carte clone() throws CloneNotSupportedException {
+        CarteServiteur c = (CarteServiteur) (Carte) super.clone(); 
+        c.setEtatDors_(new EtatDors(c));
+        c.setEtatPretAAttaquer_(new EtatPretAAttaquer(c));
+        return c;
+    }
+    
     //Transitions
     public void dors(){
         etatCourant_.dors();
@@ -54,6 +62,14 @@ public class CarteServiteur extends Carte {
 
     public void setPv(int pv) {
         pv_ = pv;
+    }
+
+    public void setEtatDors_(Etat etatDors_) {
+        this.etatDors_ = etatDors_;
+    }
+
+    public void setEtatPretAAttaquer_(Etat etatPretAAttaquer_) {
+        this.etatPretAAttaquer_ = etatPretAAttaquer_;
     }
 
     @Override

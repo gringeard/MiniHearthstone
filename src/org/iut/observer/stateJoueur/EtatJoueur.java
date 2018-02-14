@@ -27,6 +27,7 @@ public abstract class EtatJoueur {
     public void jouerCarte(int index){};
     public void lancerActionSpeciale(){};
     public void finirTour(){};
+    public void attendreTour(){};
     public void debuterTour(int tour) {};
     public void piocher(){};
     

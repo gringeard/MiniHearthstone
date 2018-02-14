@@ -6,7 +6,7 @@ import org.iut.carte.state.EtatJouee;
 import org.iut.carte.state.EtatEnDefausse;
 import org.iut.carte.state.EtatEnPile;
 
-public abstract class Carte {
+public abstract class Carte implements Cloneable {
     
     private Etat etatEnPile_;
     private Etat etatEnMain_;
@@ -28,6 +28,19 @@ public abstract class Carte {
         nom_ = nom;
         mana_ = mana;
     }
+
+    @Override
+    public Carte clone() throws CloneNotSupportedException {
+        Carte c = (Carte) super.clone();
+        c.setEtatEnPile_(new EtatEnPile(c));
+        c.setEtatEnMain_(new EtatEnMain(c));
+        c.setEtatJouee_(new EtatJouee(c));
+        c.setEtatEnDefausse_(new EtatEnDefausse(c));
+        c.setEtatCourant_(c.getEtatEnPile_());
+        return c;
+    }
+    
+    
     
     //Transitions
     public void piocherCarte(){
@@ -86,10 +99,47 @@ public abstract class Carte {
         return etatCourant_;
     }
 
+    public Etat getEtatEnPile_() {
+        return etatEnPile_;
+    }
+
+    public Etat getEtatEnMain_() {
+        return etatEnMain_;
+    }
+
+    public Etat getEtatJouee_() {
+        return etatJouee_;
+    }
+
+    public Etat getEtatEnDefausse_() {
+        return etatEnDefausse_;
+    }
+
+    
+    
+    public void setEtatEnPile_(Etat etatEnPile_) {
+        this.etatEnPile_ = etatEnPile_;
+    }
+
+    public void setEtatEnMain_(Etat etatEnMain_) {
+        this.etatEnMain_ = etatEnMain_;
+    }
+
+    public void setEtatJouee_(Etat etatJouee_) {
+        this.etatJouee_ = etatJouee_;
+    }
+
+    public void setEtatEnDefausse_(Etat etatEnDefausse_) {
+        this.etatEnDefausse_ = etatEnDefausse_;
+    }
+
+    public void setEtatCourant_(Etat etatCourant_) {
+        this.etatCourant_ = etatCourant_;
+    }
+	
+    
     @Override
     public String toString() {
         return nom_ + ": mana=" + mana_;
     }
-	
-    
 }

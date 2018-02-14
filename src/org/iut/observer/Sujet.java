@@ -6,6 +6,8 @@
 package org.iut.observer;
 
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.iut.carte.Carte;
 import org.iut.carte.CarteServiteur;
 import org.iut.hero.Hero;
@@ -15,6 +17,7 @@ import org.iut.observer.stateJoueur.EtatJoueurAttaquerHero;
 import org.iut.observer.stateJoueur.EtatJoueurDebut;
 import org.iut.observer.stateJoueur.EtatJoueurDebuterTour;
 import org.iut.observer.stateJoueur.EtatJoueurDefendreHero;
+import org.iut.observer.stateJoueur.EtatJoueurEnAttente;
 import org.iut.observer.stateJoueur.EtatJoueurFinirTour;
 import org.iut.observer.stateJoueur.EtatJoueurJouer;
 import org.iut.observer.stateJoueur.EtatJoueurJouerCarte;
@@ -44,6 +47,7 @@ public abstract class Sujet {
     private EtatJoueur etatJoueurJouerCarte;
     private EtatJoueur etatJoueurDebuterTour;
     private EtatJoueur etatJoueurFinirTour;
+    private EtatJoueur etatJoueurEnAttente;
 
     protected EtatJoueur etatJoueurCourant;
 
@@ -64,6 +68,7 @@ public abstract class Sujet {
         etatJoueurJouerCarte = new EtatJoueurJouerCarte(this);
         etatJoueurDebuterTour = new EtatJoueurDebuterTour(this);
         etatJoueurFinirTour = new EtatJoueurFinirTour(this);
+        etatJoueurEnAttente = new EtatJoueurEnAttente(this);
         
         etatJoueurCourant = etatJoueurDebut;
     }
@@ -136,18 +141,26 @@ public abstract class Sujet {
     }
     
     public void piocherCarteAleatoirement(){
-        int indice = (int) (Math.random() * this.cartesEnPile.size());
-        Carte nouvelleCarte = this.cartesEnPile.get(indice);
-        nouvelleCarte.changerEtatEnMain();
-        this.addCartesEnMain(nouvelleCarte);
+        try {
+            int indice = (int) (Math.random() * this.cartesEnPile.size());
+            Carte nouvelleCarte = (Carte) this.cartesEnPile.get(indice).clone();
+            nouvelleCarte.piocherCarte();
+            this.addCartesEnMain(nouvelleCarte);
+        } catch (CloneNotSupportedException ex) {
+            Logger.getLogger(Sujet.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     public void poserCarte(int index){
         Carte carteAPoser = this.cartesEnMain.get(index);
+        System.out.println(carteAPoser.getEtatCourant_().getClass().getSimpleName());
         this.cartesEnMain.remove(carteAPoser);
+        System.out.println(carteAPoser.getEtatCourant_().getClass().getSimpleName());
         carteAPoser.jouerCarte();
+        System.out.println(carteAPoser.getEtatCourant_().getClass().getSimpleName());
         if (carteAPoser instanceof CarteServiteur){
             this.cartesPosees.add(carteAPoser);
+            System.out.println(carteAPoser.getEtatCourant_().getClass().getSimpleName());
         }
     }
     
@@ -193,6 +206,10 @@ public abstract class Sujet {
     
     public void finirTour(){
         etatJoueurCourant.finirTour();
+    }
+    
+    public void attendreTour(){
+        etatJoueurEnAttente.attendreTour();
     }
     
     // Actions
@@ -249,5 +266,9 @@ public abstract class Sujet {
         afficherMessage();
     }
   
-  
+    public void changerEtatJoueurAttendreTour()
+    {
+        etatJoueurCourant = etatJoueurEnAttente;
+        afficherMessage();
+    }
 }

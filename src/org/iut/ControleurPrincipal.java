@@ -343,7 +343,7 @@ public class ControleurPrincipal {
                     System.out.println("Vous n'avez pas saisi un nombre");
                     choix = -99;
                 }
-                if((choix <0 && choix != -99 && choix != -2) || (choix+1) > joueur.getCartesPosees().size()){
+                if((choix <-1 && choix != -99 && choix != -2) || (choix+1) > joueur.getCartesPosees().size()){
                     System.out.println("Vous n'avez pas saisi un nombre valide");
                     choix = -99;
                 }

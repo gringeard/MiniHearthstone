@@ -77,6 +77,7 @@ public class EtatJoueurJouer extends EtatJoueur {
             //Le héros n'ayant pas de points de dégats, la carte s'endors juste
             ((CarteServiteur)joueur_.getCartesPosees().get(indexCartePourAttaquer)).dors();
         }
+        joueur_.changerEtatJoueurJouer();
     }
     
     
@@ -84,6 +85,7 @@ public class EtatJoueurJouer extends EtatJoueur {
     @Override
     public void finirTour(){
         joueur_.changerEtatJoueurFinirTour();
+        joueur_.changerEtatJoueurAttendreTour();
     };
 
     @Override
