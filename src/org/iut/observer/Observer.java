@@ -39,6 +39,5 @@ public abstract class Observer {
         System.out.println( this.hero );
         System.out.println( "cartes en main : " + this.cartesEnMain );
         System.out.println( "cartes posees : " + this.cartesPosees );
-        System.out.println( "cartes en pile : " + this.cartesEnPile );
     }
 }

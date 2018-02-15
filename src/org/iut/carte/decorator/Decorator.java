@@ -11,12 +11,12 @@ import org.iut.carte.CarteServiteur;
  *
  * @author Gwen
  */
-public class Decorator extends CarteServiteur {
+public abstract class Decorator extends CarteServiteur {
     
     protected CarteServiteur noyau;
 
     public Decorator(CarteServiteur carte) {
-        super(carte.getNom_(), carte.getMana(), carte.getDegat(), carte.getPv());
+        super(carte.getNom_(), carte.getMana(), carte.getDegat(), carte.getPdv_());
         noyau = carte;
     }
     

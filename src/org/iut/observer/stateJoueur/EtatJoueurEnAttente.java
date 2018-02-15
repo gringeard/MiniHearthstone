@@ -78,7 +78,7 @@ public class EtatJoueurEnAttente extends EtatJoueur {
         Carte cJoueur = joueur_.getCartesPosees().get(indexCJoueur);
         if(cJoueur instanceof CarteServiteur){
             //On récupère les pv de la carte du joueur et les dégats de la carte adverse
-            int pdvCJoueur = ((CarteServiteur) cJoueur).getPv();
+            int pdvCJoueur = ((CarteServiteur) cJoueur).getPdv_();
             int degatsCAdversaire = ((CarteServiteur) cAdversaire).getDegat();
             //Si la carte a plus de pv que les degats infligés
             if(pdvCJoueur > degatsCAdversaire){

@@ -6,6 +6,7 @@
 package org.iut.observer.stateJoueur;
 
 import org.iut.carte.Carte;
+import org.iut.cible.Cible;
 import org.iut.observer.Sujet;
 
 /**
@@ -25,7 +26,7 @@ public abstract class EtatJoueur {
     public void defendreHero(Carte c){};
     public void affronterCarte(int indexCJoueur, Carte cAdversaire){};
     public void jouerCarte(int index){};
-    public void lancerActionSpeciale(){};
+    public void lancerActionSpeciale(Cible cible){};
     public void finirTour(){};
     public void attendreTour(){};
     public void debuterTour(int tour) {};

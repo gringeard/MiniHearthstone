@@ -1,8 +1,9 @@
 package org.iut.hero;
 
 import org.iut.actionspeciale.ActionSpeciale;
+import org.iut.cible.Cible;
 
-public abstract class Hero {
+public abstract class Hero implements Cible {
 	
     protected int pdv_;
     protected int armure_;
@@ -35,9 +36,22 @@ public abstract class Hero {
     public String toString() {
         return this.getClass().getSimpleName()+"{" + "pdv=" + pdv_ + ", armure=" + armure_ + '}';
     }
-        
-        
-	
-	
-	
+
+    @Override
+    public void recevoirDegats(int i) {
+        this.pdv_ -= i;
+    }
+
+    public void bonusArmure(int i) {
+        this.armure_ += i;
+    }
+
+    public ActionSpeciale getActionSpeciale() {
+        return sp_;
+    }
+
+    public void setActionSpeciale(ActionSpeciale sp_) {
+        this.sp_ = sp_;
+    }
+
 }

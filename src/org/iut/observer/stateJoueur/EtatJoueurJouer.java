@@ -7,6 +7,7 @@ package org.iut.observer.stateJoueur;
 
 import org.iut.carte.Carte;
 import org.iut.carte.CarteServiteur;
+import org.iut.cible.Cible;
 import org.iut.observer.Sujet;
 
 /**
@@ -48,7 +49,7 @@ public class EtatJoueurJouer extends EtatJoueur {
         Carte cJoueur = joueur_.getCartesPosees().get(indexCJoueur);
         if(cJoueur instanceof CarteServiteur){
             //On récupère les pv de la carte du joueur et les dégats de la carte adverse
-            int pdvCJoueur = ((CarteServiteur) cJoueur).getPv();
+            int pdvCJoueur = ((CarteServiteur) cJoueur).getPdv_();
             int degatsCAdversaire = ((CarteServiteur) cAdversaire).getDegat();
             //Si la carte a plus de pv que les degats infligés
             if(pdvCJoueur > degatsCAdversaire){
@@ -80,8 +81,22 @@ public class EtatJoueurJouer extends EtatJoueur {
         joueur_.changerEtatJoueurJouer();
     }
     
-    
-    
+    @Override
+    public void lancerActionSpeciale(Cible cible){
+        //On vérifie que le joueur a assez de mana
+        if(joueur_.getMana() >= 2){
+            joueur_.changerEtatJoueurActionSpeciale();
+            //On retire le cout en mana d'une action spéciale (2)
+            joueur_.setMana(joueur_.getMana() - 2);
+            joueur_.lancerActionSpeciale(cible);
+            joueur_.changerEtatJoueurJouer();            
+        }else{
+            System.out.println("\n============================================");
+            System.out.println("Vous n'avez pas assez de mana");
+            System.out.println("============================================");
+        }
+    };
+
     @Override
     public void finirTour(){
         joueur_.changerEtatJoueurFinirTour();

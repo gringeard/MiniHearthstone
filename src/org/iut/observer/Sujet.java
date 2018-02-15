@@ -10,8 +10,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.iut.carte.Carte;
 import org.iut.carte.CarteServiteur;
+import org.iut.cible.Cible;
 import org.iut.hero.Hero;
 import org.iut.observer.stateJoueur.EtatJoueur;
+import org.iut.observer.stateJoueur.EtatJoueurActionSpeciale;
 import org.iut.observer.stateJoueur.EtatJoueurAffronterCarte;
 import org.iut.observer.stateJoueur.EtatJoueurAttaquerHero;
 import org.iut.observer.stateJoueur.EtatJoueurDebut;
@@ -48,6 +50,7 @@ public abstract class Sujet {
     private EtatJoueur etatJoueurDebuterTour;
     private EtatJoueur etatJoueurFinirTour;
     private EtatJoueur etatJoueurEnAttente;
+    private EtatJoueur etatJoueurActionSpeciale;
 
     protected EtatJoueur etatJoueurCourant;
 
@@ -69,6 +72,7 @@ public abstract class Sujet {
         etatJoueurDebuterTour = new EtatJoueurDebuterTour(this);
         etatJoueurFinirTour = new EtatJoueurFinirTour(this);
         etatJoueurEnAttente = new EtatJoueurEnAttente(this);
+        etatJoueurActionSpeciale = new EtatJoueurActionSpeciale(this);
         
         etatJoueurCourant = etatJoueurDebut;
     }
@@ -195,8 +199,8 @@ public abstract class Sujet {
         notifier();
     }
     
-    public void lancerActionSpeciale(){
-        etatJoueurCourant.lancerActionSpeciale();
+    public void lancerActionSpeciale(Cible cible) {
+        etatJoueurCourant.lancerActionSpeciale(cible);
     }
     
     public void debuterTour(int tour){
@@ -269,6 +273,15 @@ public abstract class Sujet {
     public void changerEtatJoueurAttendreTour()
     {
         etatJoueurCourant = etatJoueurEnAttente;
+        afficherMessage();
+    }
+
+    public void invoqueCarte(CarteServiteur carteServiteur) {
+        this.cartesPosees.add(carteServiteur);
+    }
+
+    public void changerEtatJoueurActionSpeciale() {
+        etatJoueurCourant = etatJoueurActionSpeciale;
         afficherMessage();
     }
 }

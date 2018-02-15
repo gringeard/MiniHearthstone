@@ -3,8 +3,9 @@ package org.iut.carte;
 import org.iut.carte.state.Etat;
 import org.iut.carte.state.EtatDors;
 import org.iut.carte.state.EtatPretAAttaquer;
+import org.iut.cible.Cible;
 
-public class CarteServiteur extends Carte {
+public class CarteServiteur extends Carte implements Cible {
 
     private Etat etatDors_;
     private Etat etatPretAAttaquer_;
@@ -56,7 +57,7 @@ public class CarteServiteur extends Carte {
         degat_ = degat;
     }
 
-    public int getPv() {
+    public int getPdv_() {
         return pv_;
     }
 
@@ -71,12 +72,15 @@ public class CarteServiteur extends Carte {
     public void setEtatPretAAttaquer_(Etat etatPretAAttaquer_) {
         this.etatPretAAttaquer_ = etatPretAAttaquer_;
     }
+    
+    @Override
+    public void recevoirDegats(int i) {
+        this.pv_ -= i;
+    }
 
     @Override
     public String toString() {
         return super.toString() + " degat=" + degat_ + " pv=" + pv_;
     }
-
-
 
 }
