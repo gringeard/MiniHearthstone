@@ -157,14 +157,10 @@ public abstract class Sujet {
     
     public void poserCarte(int index){
         Carte carteAPoser = this.cartesEnMain.get(index);
-        System.out.println(carteAPoser.getEtatCourant_().getClass().getSimpleName());
         this.cartesEnMain.remove(carteAPoser);
-        System.out.println(carteAPoser.getEtatCourant_().getClass().getSimpleName());
         carteAPoser.jouerCarte();
-        System.out.println(carteAPoser.getEtatCourant_().getClass().getSimpleName());
         if (carteAPoser instanceof CarteServiteur){
             this.cartesPosees.add(carteAPoser);
-            System.out.println(carteAPoser.getEtatCourant_().getClass().getSimpleName());
         }
     }
     
