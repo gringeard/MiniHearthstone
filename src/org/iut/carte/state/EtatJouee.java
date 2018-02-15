@@ -19,7 +19,9 @@ public class EtatJouee extends Etat {
 
     @Override
     public void afficherMessage() {
+        System.out.println("\n============================================");
         System.out.println("carte jouée");
+        System.out.println("============================================");
     }
     
 }
