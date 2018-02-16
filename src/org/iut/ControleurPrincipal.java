@@ -215,10 +215,12 @@ public class ControleurPrincipal {
                 //Sinon
                 if (indexCarteAJouer != -2) {
                     //On exécute 
-                    joueur.jouerCarte(indexCarteAJouer);
-
-                    if(joueur.getCartesPosees().get(indexCarteAJouer) instanceof CarteSort){
-                        this.lancerSort(joueur, adversaire, joueur.getCartesPosees().get(indexCarteAJouer));;
+                    if(joueur.getCartesEnMain().get(indexCarteAJouer) instanceof CarteSort){
+                        this.lancerSort(joueur, adversaire, joueur.getCartesEnMain().get(indexCarteAJouer));
+                        joueur.jouerCarte(indexCarteAJouer);
+                    }
+                    else{
+                        joueur.jouerCarte(indexCarteAJouer);
                     }
                 }
                 break;
