@@ -6,13 +6,10 @@ import org.iut.carte.state.EtatLancerSort;
 public class CarteSort extends Carte {
     
     private Etat etatLancerSort_;
-    
-    public Effet effet_;
 
-    public CarteSort(String nom, int mana, Effet effet) {
+    public CarteSort(String nom, int mana) {
         super(nom, mana);
         etatLancerSort_ = new EtatLancerSort(this);
-        effet_ = effet;
     }
 
     //Transitions
@@ -26,17 +23,10 @@ public class CarteSort extends Carte {
         afficherMessage();
     }
     
-    public Effet getEffet() {
-        return effet_;
-    }
-
-    public void setEffet(Effet effet) {
-        this.effet_ = effet;
-    }
     
     @Override
     public String toString() {
-        return super.toString() + " effet=" + effet_;
+        return super.toString();
     }
         
         

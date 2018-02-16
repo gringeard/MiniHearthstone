@@ -45,6 +45,10 @@ public abstract class Hero implements Cible {
     public void bonusArmure(int i) {
         this.armure_ += i;
     }
+    
+    public void soigner(int i) {
+        this.pdv_ += i;
+    }
 
     public ActionSpeciale getActionSpeciale() {
         return sp_;

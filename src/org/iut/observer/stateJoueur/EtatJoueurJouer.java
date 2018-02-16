@@ -7,6 +7,7 @@ package org.iut.observer.stateJoueur;
 
 import org.iut.carte.Carte;
 import org.iut.carte.CarteServiteur;
+import org.iut.carte.decorator.serviteur.VolDeVie;
 import org.iut.cible.Cible;
 import org.iut.observer.Sujet;
 
@@ -55,6 +56,9 @@ public class EtatJoueurJouer extends EtatJoueur {
             if(pdvCJoueur > degatsCAdversaire){
                 //On lui retire autant de pv que de dégats
                 ((CarteServiteur)joueur_.getCartesPosees().get(indexCJoueur)).setPv(pdvCJoueur - degatsCAdversaire);
+                if(cJoueur instanceof VolDeVie){
+                    ((VolDeVie) cJoueur).getHeros().soigner(degatsCAdversaire);
+                }
                 //La carte s'endors pour le tour
                 ((CarteServiteur)joueur_.getCartesPosees().get(indexCJoueur)).dors();
             //Sinon la carte est détruite et part en défausse

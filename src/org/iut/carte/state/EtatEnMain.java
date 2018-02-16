@@ -8,7 +8,7 @@ package org.iut.carte.state;
 import org.iut.carte.Carte;
 import org.iut.carte.CarteServiteur;
 import org.iut.carte.CarteSort;
-import org.iut.carte.decorator.Charge;
+import org.iut.carte.decorator.serviteur.Charge;
 
 /**
  *

@@ -1,5 +1,6 @@
 package org.iut.carte;
 
+import org.iut.carte.decorator.serviteur.Decorator;
 import org.iut.carte.state.Etat;
 import org.iut.carte.state.EtatEnMain;
 import org.iut.carte.state.EtatJouee;

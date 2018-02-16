@@ -3,17 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.iut.carte.decorator;
+package org.iut.carte.decorator.sort;
 
-import org.iut.carte.CarteServiteur;
+import org.iut.carte.CarteSort;
+import org.iut.carte.decorator.sort.Decorator;
 
 /**
  *
  * @author Gwen
  */
-public class Bonus1AttaqueAllies extends Decorator {
+public class Consecration extends Decorator {
     
-    public Bonus1AttaqueAllies(CarteServiteur carte) {
+    public Consecration(CarteSort carte) {
         super(carte);
     }
     

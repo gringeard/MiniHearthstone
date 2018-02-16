@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.iut.carte.decorator;
+package org.iut.carte.decorator.serviteur;
 
 import org.iut.carte.CarteServiteur;
 

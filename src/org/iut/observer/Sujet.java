@@ -10,6 +10,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.iut.carte.Carte;
 import org.iut.carte.CarteServiteur;
+import org.iut.carte.CarteSort;
+import org.iut.carte.decorator.serviteur.VolDeVie;
 import org.iut.cible.Cible;
 import org.iut.hero.Hero;
 import org.iut.observer.stateJoueur.EtatJoueur;
@@ -31,6 +33,7 @@ import org.iut.services.Service;
  * @author Gwen
  */
 public abstract class Sujet {
+
     protected String nom;
     protected Hero hero;
     protected int mana;
@@ -39,7 +42,7 @@ public abstract class Sujet {
     protected ArrayList<Carte> cartesEnMain;
     protected ArrayList<Carte> cartesPosees;
     protected ArrayList<Observer> obs;
-    
+
     private EtatJoueur etatJoueurDebut;
     private EtatJoueur etatJoueurJouer;
     private EtatJoueur etatJoueurAttaquerHero;
@@ -61,7 +64,7 @@ public abstract class Sujet {
         cartesEnMain = new ArrayList<>();
         cartesPosees = new ArrayList<>();
         obs = new ArrayList<>();
-        
+
         etatJoueurDebut = new EtatJoueurDebut(this);
         etatJoueurJouer = new EtatJoueurJouer(this);
         etatJoueurAttaquerHero = new EtatJoueurAttaquerHero(this);
@@ -73,19 +76,23 @@ public abstract class Sujet {
         etatJoueurFinirTour = new EtatJoueurFinirTour(this);
         etatJoueurEnAttente = new EtatJoueurEnAttente(this);
         etatJoueurActionSpeciale = new EtatJoueurActionSpeciale(this);
-        
+
         etatJoueurCourant = etatJoueurDebut;
     }
-    
-  public void ajoutObs( Observer o ) { obs.add( o ); }
-  
-  public void supprObs( Observer o ) { obs.remove( o ); }
-  
-  private void notifier()
-  {
-    for( Observer o : obs )
-      o.update( hero, mana, cartesEnPile, cartesEnMain, cartesPosees );
-  }
+
+    public void ajoutObs(Observer o) {
+        obs.add(o);
+    }
+
+    public void supprObs(Observer o) {
+        obs.remove(o);
+    }
+
+    private void notifier() {
+        for (Observer o : obs) {
+            o.update(hero, mana, cartesEnPile, cartesEnMain, cartesPosees);
+        }
+    }
 
     public Hero getHero() {
         return hero;
@@ -139,12 +146,12 @@ public abstract class Sujet {
     public void setCartesPosees(ArrayList<Carte> cartesPosees) {
         this.cartesPosees = cartesPosees;
     }
-    
-    public void addCartesEnMain(Carte carte){
+
+    public void addCartesEnMain(Carte carte) {
         this.cartesEnMain.add(carte);
     }
-    
-    public void piocherCarteAleatoirement(){
+
+    public void piocherCarteAleatoirement() {
         try {
             int indice = (int) (Math.random() * this.cartesEnPile.size());
             Carte nouvelleCarte = (Carte) this.cartesEnPile.get(indice).clone();
@@ -154,120 +161,113 @@ public abstract class Sujet {
             Logger.getLogger(Sujet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    public void poserCarte(int index){
+
+    public void poserCarte(int index) {
         Carte carteAPoser = this.cartesEnMain.get(index);
         this.cartesEnMain.remove(carteAPoser);
         carteAPoser.jouerCarte();
-        if (carteAPoser instanceof CarteServiteur){
+        if (carteAPoser instanceof CarteServiteur) {
             this.cartesPosees.add(carteAPoser);
+            if (carteAPoser instanceof VolDeVie) {
+                ((VolDeVie) carteAPoser).setHeros(this.getHero());
+            }
         }
     }
-    
+
     //Transitions
-    public void piocher(){
+    public void piocher() {
         etatJoueurCourant.piocher();
         notifier();
     }
-    
-    public void jouer(){
+
+    public void jouer() {
         etatJoueurCourant.piocher();
         notifier();
     }
-    
-    public void attaquerHero(int indexCartePourAttaquer){
+
+    public void attaquerHero(int indexCartePourAttaquer) {
         etatJoueurCourant.attaquerHero(indexCartePourAttaquer);
     }
-    
-    public void defendreHero(Carte c){
+
+    public void defendreHero(Carte c) {
         etatJoueurCourant.defendreHero(c);
     }
-    
-    public void affronterCarte(int indexCJoueur, Carte cAdversaire){
+
+    public void affronterCarte(int indexCJoueur, Carte cAdversaire) {
         etatJoueurCourant.affronterCarte(indexCJoueur, cAdversaire);
-        if(etatJoueurCourant == etatJoueurJouer){
+        if (etatJoueurCourant == etatJoueurJouer) {
             notifier();
         }
     }
-    
-    public void jouerCarte(int index){
+
+    public void jouerCarte(int index) {
         etatJoueurCourant.jouerCarte(index);
         notifier();
     }
-    
+
     public void lancerActionSpeciale(Cible cible) {
         etatJoueurCourant.lancerActionSpeciale(cible);
     }
-    
-    public void debuterTour(int tour){
+
+    public void debuterTour(int tour) {
         etatJoueurCourant.debuterTour(tour);
         notifier();
     }
-    
-    public void finirTour(){
+
+    public void finirTour() {
         etatJoueurCourant.finirTour();
     }
-    
-    public void attendreTour(){
+
+    public void attendreTour() {
         etatJoueurEnAttente.attendreTour();
     }
-    
+
     // Actions
-    public void afficherMessage()
-    {
+    public void afficherMessage() {
         etatJoueurCourant.afficherMessage();
     }
-  
-    public void changerEtatJoueurJouer()
-    {
+
+    public void changerEtatJoueurJouer() {
         etatJoueurCourant = etatJoueurJouer;
         afficherMessage();
     }
-    
-    public void changerEtatJoueurAttaquerHero()
-    {
+
+    public void changerEtatJoueurAttaquerHero() {
         etatJoueurCourant = etatJoueurAttaquerHero;
         afficherMessage();
     }
-    
-    public void changerEtatJoueurDefendreHero()
-    {
+
+    public void changerEtatJoueurDefendreHero() {
         etatJoueurCourant = etatJoueurDefendreHero;
         afficherMessage();
     }
-    
-    public void changerEtatJoueurAffronterCarte()
-    {
-    etatJoueurCourant = etatJoueurAffronterCarte;
+
+    public void changerEtatJoueurAffronterCarte() {
+        etatJoueurCourant = etatJoueurAffronterCarte;
         afficherMessage();
     }
-    
-    public void changerEtatJoueurPiocher()
-    {
+
+    public void changerEtatJoueurPiocher() {
         etatJoueurCourant = etatJoueurPiocher;
         afficherMessage();
     }
-    
-    public void changerEtatJoueurJouerCarte()
-    {
+
+    public void changerEtatJoueurJouerCarte() {
         etatJoueurCourant = etatJoueurJouerCarte;
         afficherMessage();
     }
-    
-    public void changerEtatJoueurDebuterTour()
-    {
+
+    public void changerEtatJoueurDebuterTour() {
         etatJoueurCourant = etatJoueurDebuterTour;
         afficherMessage();
     }
-    
-    public void changerEtatJoueurFinirTour()
-    {
+
+    public void changerEtatJoueurFinirTour() {
         etatJoueurCourant = etatJoueurFinirTour;
         afficherMessage();
     }
-  
-    public void changerEtatJoueurAttendreTour()
-    {
+
+    public void changerEtatJoueurAttendreTour() {
         etatJoueurCourant = etatJoueurEnAttente;
         afficherMessage();
     }
@@ -279,5 +279,11 @@ public abstract class Sujet {
     public void changerEtatJoueurActionSpeciale() {
         etatJoueurCourant = etatJoueurActionSpeciale;
         afficherMessage();
+    }
+
+    public void subirDegatServiteurs(int i) {
+        for (Carte carte : this.cartesPosees) {
+            ((CarteServiteur)carte).recevoirDegats(i);
+        }
     }
 }

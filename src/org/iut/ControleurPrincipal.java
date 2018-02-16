@@ -7,7 +7,14 @@ package org.iut;
 
 import java.util.Scanner;
 import org.iut.carte.Carte;
-import org.iut.carte.decorator.Provocation;
+import org.iut.carte.CarteServiteur;
+import org.iut.carte.CarteSort;
+import org.iut.carte.decorator.serviteur.Provocation;
+import org.iut.carte.decorator.sort.Consecration;
+import org.iut.carte.decorator.sort.ExplosionArcanes;
+import org.iut.carte.decorator.sort.ImageMiroir;
+import org.iut.carte.decorator.sort.MaitriseBlocage;
+import org.iut.carte.decorator.sort.Tourbillon;
 import org.iut.carte.state.EtatDors;
 import org.iut.cible.Cible;
 import org.iut.hero.FactoryHero;
@@ -209,6 +216,10 @@ public class ControleurPrincipal {
                 if (indexCarteAJouer != -2) {
                     //On exécute 
                     joueur.jouerCarte(indexCarteAJouer);
+
+                    if(joueur.getCartesPosees().get(indexCarteAJouer) instanceof CarteSort){
+                        this.lancerSort(joueur, adversaire, joueur.getCartesPosees().get(indexCarteAJouer));;
+                    }
                 }
                 break;
             //Si le joueur veut attaquer
@@ -409,6 +420,28 @@ public class ControleurPrincipal {
         } while (!ok);
 
         return choix;
+    }
+
+    private void lancerSort(Sujet joueur, Sujet adversaire, Carte carte) {
+        if (carte instanceof ImageMiroir){
+            joueur.invoqueCarte(new Provocation(new CarteServiteur("Serviteur", 0, 0, 2 )));
+            joueur.invoqueCarte(new Provocation(new CarteServiteur("Serviteur", 0, 0, 2 )));
+        }
+        else if (carte instanceof ExplosionArcanes){
+            adversaire.subirDegatServiteurs(1);
+        }
+        else if (carte instanceof Tourbillon){
+            adversaire.subirDegatServiteurs(1);
+            joueur.subirDegatServiteurs(1);
+        }
+        else if (carte instanceof MaitriseBlocage){
+            joueur.getHero().bonusArmure(5);
+            joueur.piocherCarteAleatoirement();
+        }
+        else if (carte instanceof Consecration){
+            adversaire.subirDegatServiteurs(1);
+            adversaire.getHero().recevoirDegats(2);
+        }
     }
 
 }

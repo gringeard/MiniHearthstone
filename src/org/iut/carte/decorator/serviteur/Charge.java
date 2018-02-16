@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.iut.carte.decorator;
+package org.iut.carte.decorator.serviteur;
 
 import org.iut.carte.CarteServiteur;
 
@@ -11,13 +11,15 @@ import org.iut.carte.CarteServiteur;
  *
  * @author Gwen
  */
-public abstract class Decorator extends CarteServiteur {
+public class Charge extends Decorator {
     
-    protected CarteServiteur noyau;
+    public Charge(CarteServiteur carte) {
+        super(carte);
+    }
 
-    public Decorator(CarteServiteur carte) {
-        super(carte.getNom_(), carte.getMana(), carte.getDegat(), carte.getPdv_());
-        noyau = carte;
+    @Override
+    public String toString() {
+        return noyau.toString() + " charge";
     }
     
     

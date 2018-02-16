@@ -3,23 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.iut.carte.decorator;
+package org.iut.carte.decorator.sort;
 
-import org.iut.carte.CarteServiteur;
+import org.iut.carte.CarteSort;
+import org.iut.carte.decorator.sort.Decorator;
 
 /**
  *
  * @author Gwen
  */
-public class VolDeVie extends Decorator {
+public class ExplosionArcanes extends Decorator {
     
-    public VolDeVie(CarteServiteur carte) {
+    public ExplosionArcanes(CarteSort carte) {
         super(carte);
-    }
-    
-    @Override
-    public String toString() {
-        return noyau.toString() + " vol-de-vie";
     }
     
 }
